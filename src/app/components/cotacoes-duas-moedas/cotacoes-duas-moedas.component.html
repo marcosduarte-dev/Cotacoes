@@ -1,0 +1,15 @@
+
+<div class="h-98vw flex flex-column align-items-center justify-content-center">
+  <div class="flex flex-wrap align-items-center justify-content-center card-container green-container">
+    <div>
+      <p>{{ valorMoeda1 }} {{ paisSelecionado1.nome }} valem hoje: </p>
+      <h1>{{ convertido }} {{ paisSelecionado2.nome }}</h1>
+    </div>
+  </div>
+  <div class="flex flex-wrap align-items-center justify-content-center card-container green-container">
+    <p-dropdown [options]="paises" [(ngModel)]="paisSelecionado1" optionLabel="nome"></p-dropdown>
+    <p-inputNumber [(ngModel)]="valorMoeda1" mode="currency" currency="{{ paisSelecionado1.moeda }}" locale="pt-BR"></p-inputNumber>
+    <p-dropdown [options]="paises" [(ngModel)]="paisSelecionado2" optionLabel="nome"></p-dropdown>
+    <p-inputNumber [(ngModel)]="valorMoeda2" mode="currency" currency="{{ paisSelecionado2.moeda }}" locale="pt-BR"></p-inputNumber>
+  </div>
+</div>
