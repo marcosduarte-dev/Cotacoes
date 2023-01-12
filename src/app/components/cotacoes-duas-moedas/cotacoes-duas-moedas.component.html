@@ -8,8 +8,11 @@
   </div>
   <div class="flex flex-wrap align-items-center justify-content-center card-container green-container">
     <p-dropdown [options]="paises" [(ngModel)]="paisSelecionado1" optionLabel="nome"></p-dropdown>
-    <p-inputNumber [(ngModel)]="valorMoeda1" mode="currency" currency="{{ paisSelecionado1.moeda }}" locale="pt-BR"></p-inputNumber>
+    <p-inputNumber [(ngModel)]="valorMoeda1" mode="currency" currency="{{ paisSelecionado1.moeda }}" locale="pt-BR" (onInput)="ultimoDigitado = false"></p-inputNumber>
     <p-dropdown [options]="paises" [(ngModel)]="paisSelecionado2" optionLabel="nome"></p-dropdown>
-    <p-inputNumber [(ngModel)]="valorMoeda2" mode="currency" currency="{{ paisSelecionado2.moeda }}" locale="pt-BR"></p-inputNumber>
+    <p-inputNumber [(ngModel)]="valorMoeda2" mode="currency" currency="{{ paisSelecionado2.moeda }}" locale="pt-BR" (onInput)="ultimoDigitado = true"></p-inputNumber>
   </div>
+
+  <button pButton type="button" label="Calcular" (click)="calcular()" ></button>
+
 </div>

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import {DropdownFilterOptions} from 'primeng/dropdown';
+import { timeout } from 'rxjs';
+import { ExchangeRateModel } from 'src/app/models/exchenge-rate.model';
+import { Rates } from 'src/app/models/rates.model';
+import { ExchangeRateService } from 'src/app/services/exchange-rate.service';
 
 interface Pais {
   nome: string,
@@ -23,7 +27,11 @@ export class CotacoesDuasMoedasComponent {
 
   convertido: number;
 
-  constructor() {
+  valores!: Rates;
+
+  ultimoDigitado: boolean = false;
+
+  constructor(private exchangeRateService: ExchangeRateService) {
       this.paises = [
           {nome: 'Real', moeda: 'BRL'},
           {nome: 'Dolar', moeda: 'USD'},
@@ -42,5 +50,27 @@ export class CotacoesDuasMoedasComponent {
       this.convertido = 0;
   }
 
+  calcular(): void {
 
+    type ObjectKey = keyof typeof this.valores;
+
+    const valorMoeda1paraMoeda2 = this.paisSelecionado2.moeda as ObjectKey;
+    const valorMoeda2paraMoeda1 = this.paisSelecionado1.moeda as ObjectKey;
+
+    this.exchangeRateService.getBase(this.paisSelecionado1.moeda).subscribe((res) => {
+      this.valores = res.rates;
+    })
+
+    setTimeout(() => {
+      if(!this.ultimoDigitado) {
+        this.convertido = this.valorMoeda1 * this.valores[valorMoeda1paraMoeda2];
+        this.valorMoeda2 = this.convertido
+      } else {
+        this.convertido = this.valorMoeda2
+        this.valorMoeda1 = this.valorMoeda2 / this.valores[valorMoeda1paraMoeda2];
+      }
+    }, 100);
+
+
+  }
 }
