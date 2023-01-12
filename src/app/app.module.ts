@@ -12,9 +12,10 @@ import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CotacoesDuasMoedasComponent } from './components/cotacoes-duas-moedas/cotacoes-duas-moedas.component';
+import { MoedasPipe } from './pipes/moedas.pipe';
 
 @NgModule({
-  declarations: [AppComponent, CotacoesDuasMoedasComponent],
+  declarations: [AppComponent, CotacoesDuasMoedasComponent, MoedasPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
